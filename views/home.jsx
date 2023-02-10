@@ -12,7 +12,7 @@ function home() {
                     </a>
                 </div>
                 <div className='d-inline-flex p-5 m-5 justify-content-center row'> {/* image grid */}
-                    <div class='col-lg-4 col md-12 mb-2 mb-lg-0'>
+                    <div className='col-lg-4 col md-12 mb-2 mb-lg-0'>
                         <img src='/images/protein-salad.jpg' alt='Protein Salad' className='img-fluid w-100 shadow-1-strong rounded' />
                         <p className='mb-4'>
                             Photo by <a href="https://unsplash.com/@pwign?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Anh Nguyen</a> on <a href="https://unsplash.com/photos/kcA-c3f_3FE?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
