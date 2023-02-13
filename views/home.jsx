@@ -5,13 +5,13 @@ function home() {
     return (
         <Def>
             <main>
-                <h1 className='mt-5'>REST-Rant</h1>
-                <div className='w-75 p-1 mt-5 mx-auto'>
+                <h1>REST-Rant</h1>
+                <div className='w-75 p-1 mx-auto'>
                     <a href='/places' className='d-flex justify-content-center'>
                         <button className='btn btn-primary btn-lg btn-block'>Places Page</button>
                     </a>
                 </div>
-                <div className='d-inline-flex p-5 m-5 justify-content-center row'> {/* image grid */}
+                <div className='d-inline-flex mx-5 mt-5 justify-content-center row'> {/* image grid */}
                     <div className='col-lg-4 col md-12 mb-2 mb-lg-0'>
                         <img src='/images/protein-salad.jpg' alt='Protein Salad' className='img-fluid w-100 shadow-1-strong rounded' />
                         <p className='mb-4'>
