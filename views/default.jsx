@@ -9,10 +9,23 @@ function Def(html) {
                 <link rel='stylesheet' href='/css/style.css' />
             </head>
             <body className='flex-grow-1 flex-shrink-0'>
+                <nav className='mb-5'>
+                    <ul>
+                        <li>
+                            <a href='/'>Home</a>
+                        </li>
+                        <li>
+                            <a href='/places'>Places</a>
+                        </li>
+                        <li>
+                            <a href='/places/new'>Add Place</a>
+                        </li>
+                    </ul>
+                </nav>
                 {html.children}
             </body>
             <footer className='flex-shrink-0'>
-                <div className='card card-white rounded text-center mt-2 mx-auto mb-5 w-75 '>
+                <div className='card card-white rounded text-center mt-5 mx-auto mb-5 w-75 '>
                     <div className='card-header'>
                         Connect With Me
                     </div>
