@@ -1,7 +1,7 @@
 const React = require('react')
 const Def = require('../default')
 
-function showPlace () {
+function show () {
     return (
         <Def>
             <main>
@@ -11,4 +11,4 @@ function showPlace () {
     )
 }
 
-module.exports = showPlace
+module.exports = show
