@@ -1,14 +1,14 @@
 const React = require('react')
 const Def = require('../default')
 
-function editPlace () {
+function edit_form () {
     return (
         <Def>
             <main>
-                <h1>EDIT PAGE</h1>
+                <h1>Edit Place</h1>
             </main>
         </Def>
     )
 }
 
-module.exports = editPlace
+module.exports = edit_form
