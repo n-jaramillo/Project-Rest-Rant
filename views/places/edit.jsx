@@ -1,7 +1,7 @@
 const React = require('react')
 const Def = require('../default')
 
-function edit_form (data) {
+function edit_form(data) {
     return (
         <Def>
             <main>
@@ -78,9 +78,15 @@ function edit_form (data) {
                             </datalist>
                         </div>
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor='cuisines'>Cuisines</label>
-                        <input className='form-control' id='cuisines' name='cuisines' defaultValue={data.place.cuisines} required />
+                    <div className='row'>
+                        <div className='form-group col-sm-6'>
+                            <label htmlFor='cuisines'>Cuisines</label>
+                            <input className='form-control' id='cuisines' name='cuisines' defaultValue={data.place.cuisines} required />
+                        </div>
+                        <div className='form-group col-sm-6'>
+                            <label htmlFor='founded'>Year Established</label>
+                            <input type='number' className='form-control' id='founded' name='founded' min="1900" max="2099" step="1" defaultValue={data.place.founded} />
+                        </div>
                     </div>
                     <input className='btn btn-primary' type='submit' value='Add Place' />
                 </form>

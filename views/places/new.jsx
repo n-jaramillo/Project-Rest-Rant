@@ -78,6 +78,10 @@ function new_form() {
                         <label htmlFor='cuisines'>Cuisines</label>
                         <input className='form-control' id='cuisines' name='cuisines' required />
                     </div>
+                    <div className='form-group'>
+                        <label htmlFor='founded'>Year Established</label>
+                        <input type='number' className='form-control' id='founded' name='founded' min="1900" max="2099" step="1"/>
+                    </div>
                     <input className='btn btn-primary' type='submit' value='Add Place' />
                 </form>
             </main>
