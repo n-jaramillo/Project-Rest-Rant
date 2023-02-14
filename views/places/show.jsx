@@ -23,11 +23,11 @@ function show(data) {
                 </div>
                 <div className='d-inline-flex mt-3'>
                     <a href={`/places/${data.id}/edit`} className='btn btn-warning mx-5'>
-                        Edit
+                        <i className="bi-pencil-square"></i> Edit
                     </a>
                     <form method='POST' action={`/places/${data.id}?_method=DELETE`}>
                         <button type='submit' className='btn btn-danger mx-5'>
-                            Delete
+                            <i className="bi-trash3-fill"></i> Delete
                         </button>
                     </form>
                 </div>
