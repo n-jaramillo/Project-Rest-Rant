@@ -8,21 +8,23 @@ function show(data) {
                 <div className='d-inline-flex row'>
                     <div className='col'>
                         <img src={data.place.pic} alt={data.place.name} className='img-fluid w-100 shadow-1-strong rounded' />
+                        <p>Located in {`${data.place.city}, ${data.place.state} and serving ${data.place.cuisines}`}</p>
                     </div>
                     <div className='col d-inline-flex flex-column justify-content-center'>
                         <h1>{data.place.name}</h1>
                         {
                             data.place.founded
-                            ? <h5 className='text-muted'>Established {data.place.founded}</h5>
-                            : <br />
-                        }                      
+                                ? <h5 className='text-muted'>Established {data.place.founded}</h5>
+                                : <br />
+                        }
                         <div className='mt-3'>
                             <h2 className='text-info'>Rating</h2>
                             <p className='text-muted'>Not Rated</p>
                         </div>
                         <div className='mt-3'>
                             <h2 className='text-info'>Description</h2>
-                            <p>Located in {`${data.place.city}, ${data.place.state} and serving ${data.place.cuisines}`}</p>
+                            <h3>{data.place.showEstablished()}</h3>
+                            <h4>Serving {data.place.cuisines}</h4>
                         </div>
                     </div>
                 </div>
