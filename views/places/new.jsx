@@ -81,7 +81,7 @@ function new_form() {
                         </div>
                         <div className='form-group col-sm-6 col-md-4 col-lg-3'>
                             <label htmlFor='founded'>Year Established</label>
-                            <input type='number' className='form-control' id='founded' name='founded' min="1900" max="2099" step="1"/>
+                            <input type='number' className='form-control' id='founded' name='founded' value={new Date().getFullYear()} step="1" /> {/*min="1673" max={new Date().getFullYear()} */}
                         </div>
                     </div>
                     <input className='btn btn-primary' type='submit' value='Add Place' />
