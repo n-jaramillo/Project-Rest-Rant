@@ -9,7 +9,22 @@ function new_form(data) {
                 {data.message}
             </h4>
         )
-
+    }
+    let values = {
+        name : '',
+        pic : '',
+        city : '',
+        state : '',
+        founded : new Date().getFullYear(),
+        cuisines : '',
+    }
+    if (data.value) {
+        data.value.name ? values.name = data.value.name : values.name = ''
+        data.value.pic ? values.pic = data.value.pic : values.pic = ''
+        data.value.city ? values.city = data.value.city : values.city = ''
+        data.value.state ? values.state = data.value.state : values.state = ''
+        data.value.founded ? values.founded = data.value.founded : values.founded = new Date().getFullYear()
+        data.value.cuisines ? values.cuisines = data.value.cuisines : values.cuisines = ''
     }
     return (
         <Def>
@@ -18,21 +33,21 @@ function new_form(data) {
                 {message}
                 <form action='/places' method='POST'>
                     <div className='row'>
-                        <div className='form-group col-sm-6 col-md-4 col-lg-3'>
+                        <div className='form-group col-sm-6'>
                             <label htmlFor='name'>Place Name</label>
-                            <input className='form-control' id='name' name='name' required />
+                            <input className='form-control' id='name' name='name' required defaultValue={values.name} />
                         </div>
-                        <div className='form-group col-sm-6 col-md-4 col-lg-3'>
+                        <div className='form-group col-sm-6'>
                             <label htmlFor='pic'>Place Picture</label>
-                            <input className='form-control' type='url' id='pic' name='pic' />
+                            <input className='form-control' type='url' id='pic' name='pic' defaultValue={values.pic} />
                         </div>
-                        <div className='form-group col-sm-6 col-md-4 col-lg-3'>
+                        <div className='form-group col-sm-4'>
                             <label htmlFor='city'>City</label>
-                            <input className='form-control' id='city' name='city' />
+                            <input className='form-control' id='city' name='city' defaultValue={values.city} />
                         </div>
-                        <div className='form-group col-sm-6 col-md-4 col-lg-3'>
+                        <div className='form-group col-sm-4'>
                             <label htmlFor='state'>State</label>
-                            <input className='form-control' id='state' name='state' list='state-list' />
+                            <input className='form-control' id='state' name='state' list='state-list' defaultValue={values.state} />
                             <datalist id='state-list'>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -85,13 +100,13 @@ function new_form(data) {
                                 <option value="WY">Wyoming</option>
                             </datalist>
                         </div>
-                        <div className='form-group col-sm-6 col-md-4 col-lg-3'>
-                            <label htmlFor='cuisines'>Cuisines</label>
-                            <input className='form-control' id='cuisines' name='cuisines' required />
-                        </div>
-                        <div className='form-group col-sm-6 col-md-4 col-lg-3'>
+                        <div className='form-group col-sm-4'>
                             <label htmlFor='founded'>Year Established</label>
-                            <input type='number' className='form-control' id='founded' name='founded' value={new Date().getFullYear()} step="1" /> {/*min="1673" max={new Date().getFullYear()} */}
+                            <input type='number' className='form-control' id='founded' name='founded'  step="1" defaultValue={values.founded} /> {/*  min="1673" max={new Date().getFullYear()} */}
+                        </div>
+                        <div className='form-group col-sm-12'>
+                            <label htmlFor='cuisines'>Cuisines</label>
+                            <input className='form-control' id='cuisines' name='cuisines' required defaultValue={values.cuisines} />
                         </div>
                     </div>
                     <input className='btn btn-primary' type='submit' value='Add Place' />
