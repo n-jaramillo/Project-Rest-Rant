@@ -1,27 +1,4 @@
-// const places = require('../models/places.js')
 /*
-router.get('/', (req, res) => {
-    res.render('places/index', { places })
-})
-
-router.post('/', (req, res) => {
-    if (!req.body.pic) {
-        req.body.pic = '/images/chia-fruit-drink.jpg'
-    }
-    if (!req.body.city) {
-        req.body.city = 'Anytown'
-    }
-    if (!req.body.state) {
-        req.body.state = 'USA'
-    }
-    places.push(req.body)
-    res.redirect('/places')
-})
-
-router.get('/new', (req, res) => {
-    res.render('places/new')
-})
-
 router.get('/:id/edit', (req, res) => {
     let id = Number(req.params.id)
     if (isNaN(id)) {
@@ -135,11 +112,13 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', (req, res) => {
     db.Place.findById(req.params.id)
+    .populate('comments')
     .then(place => {
+        console.log(place.comments)
         res.render('places/show', { place })
     })
     .catch(err => {
-        console.log(err)
+        console.log('err', err)
         res.render('error404')
     })
 })
