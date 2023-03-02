@@ -1,20 +1,20 @@
 const React = require('react')
 const Def = require('../default')
 
-function new_form() {
+function new_form(data) {
     return (
         <Def>
             <main>
                 <h1>Add a Rant or Rave</h1>
-                <form action={`rant`} method='POST'>
+                <form action={`/places/${data.id}/comment`} method='POST'>
                     <div className='row'>
                         <div className='form-group col-sm-6'>
                             <label htmlFor='rant'>Rant?</label>
                             <input className='form-control' type='checkbox' id='rant' name='rant' />
                         </div>
                         <div className='form-group col-sm-6'>
-                            <label htmlFor='star'>Star Rating</label>
-                            <input className='form-control' type='number' id='star' name='star' step="0.5" min="1" max="5" required />
+                            <label htmlFor='stars'>Star Rating</label>
+                            <input className='form-control' type='number' id='stars' name='stars' step="0.5" min="1" max="5" required />
                         </div>
                         <div className='form-group col-sm-12'>
                             <label htmlFor='content'>Comment</label>

@@ -2,17 +2,44 @@ const React = require('react')
 const Def = require('../default')
 
 function show(data) {
+    function switchStars(stars) {
+        switch (stars) {
+            case 1:
+                return (<><i className="bi-star-fill" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /></>);
+            case 1.5:
+                return (<><i className="bi-star-fill" /><i className="bi-star-half" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /></>);
+            case 2:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /></>);
+            case 2.5:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-half" /><i className="bi-star" /><i className="bi-star" /></>);
+            case 3:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star" /><i className="bi-star" /></>);
+            case 3.5:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-half" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /></>);
+            case 4:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star" /></>);
+            case 4.5:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-half" /></>);
+            case 5:
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /></>);
+            default:
+                return (<><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /></>);
+        }
+    }
+
     let comments = (
         <h3 className='inactive'>
             No comments yet!
         </h3>
     )
+
     if (data.place.comments.length) {
         comments = data.place.comments.map(c => {
             return (
-                <div className='border p-3'>
-                    <h3 className='rant'>{c.rant ? 'Rant! 😡' : 'Rave! 😻'}</h3>
-                    <h5>Rating: {c.stars}</h5>
+                <div className='col-xs-12 col-md-6 col-lg-4 border p-3 m-3'>
+                    {c.rant ? <h3 className='rant text-danger'>Rant! 😡</h3> : <h3 className='rant text-info'>Rave! 😻</h3>}
+                    <h5 className='text-warning'>{switchStars(c.stars)}</h5>
+                    <p className='small'>Rating: {c.stars.toFixed(1)}</p>
                     <p>
                         {c.content}
                         <br />
@@ -22,6 +49,7 @@ function show(data) {
             )
         })
     }
+
     return (
         <Def>
             <main className='text-muted d-inline-flex container p-3'>
@@ -51,14 +79,14 @@ function show(data) {
                     </div>
                     <div className='row mt-3 justify-content-center'>
                         <div className='col-xs-6'>
-                            <a href={`/places/${data.id}/edit`} className='btn btn-warning mx-5'>
-                                <i className="bi-pencil-square"></i> Edit
+                            <a href={`/places/${data.place.id}/edit`} className='btn btn-warning mx-5'>
+                                <i className="bi-pencil-square" /> Edit
                             </a>
                         </div>
                         <div className='col-xs-6'>
-                            <form method='POST' action={`/places/${data.id}?_method=DELETE`}>
+                            <form method='POST' action={`/places/${data.place.id}?_method=DELETE`}>
                                 <button type='submit' className='btn btn-danger mx-5'>
-                                    <i className="bi-trash3-fill"></i> Delete
+                                    <i className="bi-trash3-fill" /> Delete
                                 </button>
                             </form>
                         </div>
@@ -67,7 +95,13 @@ function show(data) {
                     <div className='row'>
                         <div className='col-sm-12 p-3'>
                             <h2 className='text-info'>Comments</h2>
-                            {comments}
+                            <div className='col-xs-12'>
+                                <a href={`/places/${data.place.id}/comment`} className='btn btn-info mx-5'>
+                                    <i className="bi-star" /> Add Comment
+                                </a>
+                            </div>
+                            <br />
+                            <div className='row justify-content-center'>{comments}</div>
                         </div>
                     </div>
                 </div>
