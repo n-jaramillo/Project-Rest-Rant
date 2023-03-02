@@ -68,6 +68,11 @@ function show(data) {
                         <br />
                         <strong>- {c.author}</strong>
                     </p>
+                    <form method='POST' action={`/places/${data.place.id}/comment/${c.id}?_method=DELETE`}>
+                        <button type='submit' className='btn btn-outline-danger btn-sm'>
+                            <i className="bi-trash3-fill" /> Delete Comment
+                        </button>
+                    </form>
                 </div>
             )
         })

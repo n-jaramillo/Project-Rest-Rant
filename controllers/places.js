@@ -1,70 +1,7 @@
-/*
-router.get('/:id/edit', (req, res) => {
-    let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
-        res.render('places/edit', { place: places[id], id })
-    }
-})
-
-router.get('/:id', (req, res) => {
-    let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
-        res.render('places/show', { place: places[id], id })
-    }
-})
-
-router.delete('/:id', (req, res) => {
-    let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
-        places.splice(id, 1)
-        res.redirect('/places')
-    }
-})
-
-router.put('/:id', (req, res) => {
-    let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
-        if (!req.body.pic) {
-            req.body.pic = '/images/chia-fruit-drink.jpg'
-        }
-        if (!req.body.city) {
-            req.body.city = 'Anytown'
-        }
-        if (!req.body.state) {
-            req.body.state = 'USA'
-        }
-        places[id] = req.body
-        res.redirect(`/places/${id}`)
-    }
-})
-*/
 const router = require('express').Router()
 const db = require('../models')
 
+// INDEX
 router.get('/', (req, res) => {
     db.Place.find()
         .then((places) => {
@@ -76,6 +13,7 @@ router.get('/', (req, res) => {
         })
 })
 
+// NEW POST
 router.post('/', (req, res) => {
     if (!req.body.pic) {
         req.body.pic = undefined
@@ -106,10 +44,12 @@ router.post('/', (req, res) => {
         })
 })
 
+// NEW FORM
 router.get('/new', (req, res) => {
     res.render('places/new')
 })
 
+// SHOW
 router.get('/:id', (req, res) => {
     db.Place.findById(req.params.id)
         .populate('comments')
@@ -122,6 +62,19 @@ router.get('/:id', (req, res) => {
         })
 })
 
+// EDIT FORM
+router.get('/:id/edit', (req, res) => {
+    db.Place.findById(req.params.id)
+        .then(place => {
+            res.render('places/edit', { place })
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.render('error404')
+        })
+})
+
+// EDIT PUT
 router.put('/:id', (req, res) => {
     if (!req.body.pic) {
         req.body.pic = undefined
@@ -142,6 +95,7 @@ router.put('/:id', (req, res) => {
         })
 })
 
+// DELETE
 router.delete('/:id', (req, res) => {
     db.Place.findByIdAndDelete(req.params.id)
         .then(place => {
@@ -153,21 +107,12 @@ router.delete('/:id', (req, res) => {
         })
 })
 
-router.get('/:id/edit', (req, res) => {
-    db.Place.findById(req.params.id)
-        .then(place => {
-            res.render('places/edit', { place })
-        })
-        .catch(err => {
-            console.log('err', err)
-            res.render('error404')
-        })
-})
-
+// NEW COMMENT FORM
 router.get('/:id/comment', (req, res) => {
     res.render('comments/new', { id: req.params.id })
 })
 
+// NEW COMMENT POST
 router.post('/:id/comment', (req, res) => {
     req.body.rant = req.body.rant ? true : false
     db.Place.findById(req.params.id)
@@ -189,8 +134,12 @@ router.post('/:id/comment', (req, res) => {
         })
 })
 
+// DELETE COMMENT
 router.delete('/:id/comment/:rantId', (req, res) => {
-    res.send('GET /places/:id/comment/:rantId stub')
+    db.Comment.findByIdAndDelete(req.params.rantId)
+        .then(() => {
+            res.status(303).redirect(`/places/${req.params.id}`)
+        })
 })
 
 module.exports = router
