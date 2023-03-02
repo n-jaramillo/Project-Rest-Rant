@@ -28,15 +28,33 @@ function show(data) {
     }
 
     let comments = (
-        <h3 className='inactive'>
+        <h5 className='inactive'>
             No comments yet!
-        </h3>
+        </h5>
+    )
+
+    let rating = (
+        <h5 className='inactive'>
+            Not yet rated
+        </h5>
     )
 
     if (data.place.comments.length) {
+        let sumRatings = data.place.comments.reduce((tot, c) => {
+            return tot + c.stars
+        }, 0)
+        
+        let averageRating = sumRatings / data.place.comments.length
+
+        rating = (
+            <h5>
+                {averageRating.toFixed(1)} stars
+            </h5>
+        )
+
         comments = data.place.comments.map(c => {
             return (
-                <div key={c.id} className='col-xs-4 border p-2 m-2' style={{width: '300px'}}>
+                <div key={c.id} className='col-xs-4 border p-2 m-2' style={{ width: '300px' }}>
                     {c.rant ? <h3 className='rant text-danger'>Rant! 😡</h3> : <h3 className='rant text-info'>Rave! 😻</h3>}
                     <hr />
                     <h5 className='text-warning'>{switchStars(c.stars)}</h5>
@@ -70,7 +88,7 @@ function show(data) {
                             }
                             <div className='mt-3'>
                                 <h2 className='text-info'>Rating</h2>
-                                <p >Not Rated</p>
+                                {rating}
                             </div>
                             <div className='mt-3'>
                                 <h2 className='text-info'>Description</h2>
