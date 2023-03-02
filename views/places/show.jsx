@@ -15,7 +15,7 @@ function show(data) {
             case 3:
                 return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star" /><i className="bi-star" /></>);
             case 3.5:
-                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-half" /><i className="bi-star" /><i className="bi-star" /><i className="bi-star" /></>);
+                return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-half" /><i className="bi-star" /></>);
             case 4:
                 return (<><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star-fill" /><i className="bi-star" /></>);
             case 4.5:
@@ -43,13 +43,16 @@ function show(data) {
         let sumRatings = data.place.comments.reduce((tot, c) => {
             return tot + c.stars
         }, 0)
-        
+
         let averageRating = sumRatings / data.place.comments.length
 
         rating = (
-            <h5>
-                {averageRating.toFixed(1)} stars
-            </h5>
+            <>
+                <h5 className='text-warning'>
+                    {switchStars(averageRating)}
+                </h5>
+                <p className='small'>{averageRating.toFixed(1)} star average</p>
+            </>
         )
 
         comments = data.place.comments.map(c => {
